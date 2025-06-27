@@ -96,6 +96,30 @@ def send_feishu_rich_text_message(webhook_url, title, content):
     return response
 
 
+# 发送飞书富文本消息
+def send_feishu_group_shar_message(webhook_url, group_id):
+    """
+    发送富文本消息到飞书机器人 webhook。 !机器人只能分享其所在群的群名片。!
+
+    :param webhook_url: 飞书机器人的 webhook 地址
+    :param group_id: 群ID list 参考：https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description
+    :return: 响应对象
+    """
+    headers = {
+        "Content-Type": "application/json"
+    }
+
+    payload = {
+        "msg_type": "share_chat",
+        "content":{
+            "share_chat_id": group_id
+        }
+    }
+
+    response = requests.post(webhook_url, headers=headers, data=json.dumps(payload))
+    return response
+
+
 # 发送飞书文本消息
 def send_feishu_text_message(webhook_url, message):
     """
