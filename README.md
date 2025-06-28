@@ -1,7 +1,7 @@
 # 说明
-FeishuGroupBot 是一个基于飞书机器人API的Python库，用于发送消息到飞书群组。
+PyFeishuGroupBot 是一个基于飞书机器人API的Python库，用于发送消息到飞书群组。
 # 安装
-pip install FeishuGroupBot
+pip install PyFeishuGroupBot
 # 使用
 ```python
 from PyFeishuGroupBot import *
