@@ -1,0 +1,53 @@
+name: Publish Python Package
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  id-token: write  # Trusted Publishing 需要
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install build tool
+        run: python -m pip install --upgrade build
+
+      - name: Build package
+        run: python -m build
+
+      - name: Upload built distributions as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: pypi  # 你的环境名字，确保跟 GitHub 环境保护一致
+
+    steps:
+      - name: Download built distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Publish package to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist/
+        env:
+          PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
