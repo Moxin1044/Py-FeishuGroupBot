@@ -6,7 +6,7 @@ with io.open('README.md', encoding='utf-8') as f:
 
 setup(
     name='PyFeishuGroupBot',
-    version='0.0.2',
+    version='0.0.5',
     install_requires=['requests'],
     packages=find_packages(),
     include_package_data=True,
