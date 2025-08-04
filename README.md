@@ -31,3 +31,5 @@ bot.send_rich_text("Title", [{"tag": "text","text": "项目有更新: "}, {"tag"
 bot.send_group_share(["oc_f5b1a7eb27ae2****339ff"])
 
 ```
+# 更新日志
+2025年8月4日 更新 Github Actions
